@@ -17,7 +17,7 @@ class StudentController extends Controller
         //
 
         $data = Student::oldest()->get();
-        return view('index', ['data' => $data]);
+        return view('projects.index', ['data' => $data]);
         
     }
 
@@ -63,17 +63,26 @@ class StudentController extends Controller
             'email' => 'required',
             'address' => 'required',
             'phone' => 'required',
+            'gender' => 'required',
+            'selectclass' => 'required',
+            'accepted_terms' => 'required|boolean',
         ]);
+
         $student = new Student();
         $student->firstname = request('firstname');
         $student->lastname = request('lastname');
         $student->email = request('email');
         $student->address = request('address');
         $student->phone = request('phone');
-        
+        $student->gender = request('gender');
+        $student->selectclass = request('selectclass');
+
+        $student->accepted_terms = request('accepted_terms');
+
+
         $student->save();
 
-        return redirect('/');
+        return redirect('/std-list');
     }
 
     /**
@@ -82,9 +91,11 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function show(Student $student)
+    public function show(Student $student, $id)
     {
         //
+        $student = Student::findOrFail($id);
+        return view('projects.single', ['single' => $student]);
     }
 
     /**
@@ -108,6 +119,8 @@ class StudentController extends Controller
             'email' => 'required',
             'address' => 'required',
             'phone' => 'required',
+            'gender' => 'required',
+            'selectclass' => 'required',
         ]);
 
         $student = Student::findOrFail($id);
@@ -117,10 +130,13 @@ class StudentController extends Controller
         $student->email = request(key: 'email');
         $student->address = request(key: 'address');
         $student->phone = request(key: 'phone');
+        $student->gender = request(key: 'gender');
+        $student->selectclass = request(key: 'selectclass');
+
         
         $student->update();
 
-        return redirect('/');
+        return redirect('/std-list');
     }
     
 
@@ -136,6 +152,6 @@ class StudentController extends Controller
         $student = Student::findOrFail($id);
         $student->delete();
 
-        return redirect('/');
+        return redirect('/std-list');
     }
 }

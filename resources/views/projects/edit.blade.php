@@ -32,7 +32,41 @@
             <input value="{{$studentdata->phone}}" name="phone" type="tel" class="form-control" id="phone" placeholder="Enter your phone number" required>
         </div>
         <br>
+
+        <div class="form-group">
+            <label for="gender">Gender</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="gender" id="male" value="male" {{ $studentdata->gender == 'male' ? 'checked' : '' }} required>
+                <label class="form-check-label" for="male">
+                    Male
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="gender" id="female" value="female" {{ $studentdata->gender == 'female' ? 'checked' : '' }} required>
+                <label class="form-check-label" for="female">
+                    Female
+                </label>
+            </div>
+        </div>
+        <br>
+         <div class="form-row">
+            <div class="col-md-6">
+                <label for="class">Class</label>
+                <select name="selectclass" class="form-control" id="class" required>
+
+                @foreach(['class1', 'class2', 'class3', 'class4', 'class5', 'class6', 'class7', 'class8', 'class9', 'class10'] as $class)
+                    
+                    <option value="{{ $class }}" {{ $studentdata->selectclass == $class ? 'selected' : '' }}>{{ $class }}</option>
+                @endforeach
+
+                </select>
+            </div>
+        </div>
+        <br>
+
+
         <button class="btn btn-primary" type="submit">Update</button>
+        <br><br>
     </form>
 </div>
 @endsection

@@ -1,11 +1,6 @@
-@extends('app')
-
-
-  
-  @section('content')
+@include('projects/header')
   <div class="container mt-3">
     <h2>Student data</h2>
-    <a href="/addstd" class="btn btn-success float-end mb-3">Add New Student</a>
     <!-- Table -->
     <table class="table table-striped">
       <thead>
@@ -29,6 +24,10 @@
           <td>{{$singledata->address}}</td>
           <td>{{$singledata->phone}}</td>
           <td>
+            <!-- view Button -->
+            <button type="button" class="btn btn-success btn-sm">
+              <a  style="color:#fff;" href="/single-student/{{$singledata->id}}">View</a>
+            </button>
             <!-- Edit Button -->
             <button type="button" class="btn btn-warning btn-sm">
               <a href="/edit-student/{{$singledata->id}}/edit">Edit</a>
@@ -47,5 +46,5 @@
 
     </table>
   </div>
-  @endsection
+@include('projects/footer')
 
